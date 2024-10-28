@@ -1,0 +1,31 @@
+
+/* Set the basic styling for the unordered list */
+.nav-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;                 /* Use flexbox for equal spacing */
+  justify-content: space-evenly; /* Even spacing between items */
+  align-items: center;           /* Center items vertically */
+  background-color: #333;
+  height: 20%;                 /* Full page height */
+}
+
+/* List items */
+.nav-item {
+  flex-grow: 1;                  /* Allow items to grow equally */
+}
+
+/* Links inside list items */
+.nav-item a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 24px 0;               /* Adjust padding for vertical centering */
+  text-decoration: none;
+}
+
+/* Hover effect for links */
+.nav-item a:hover {
+  background-color: #111;
+}

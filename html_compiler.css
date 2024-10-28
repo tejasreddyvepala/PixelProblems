@@ -1,0 +1,128 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f0f2f5;
+}
+
+
+/* Set the basic styling for the unordered list */
+.nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;                 /* Use flexbox for equal spacing */
+    justify-content: space-evenly; /* Even spacing between items */
+    align-items: center;           /* Center items vertically */
+    background-color: #333;
+    height: 20%;                 /* Full page height */
+  }
+  
+  /* List items */
+  .nav-item {
+    flex-grow: 1;                  /* Allow items to grow equally */
+  }
+  
+  /* Links inside list items */
+  .nav-item a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 24px 0;               /* Adjust padding for vertical centering */
+    text-decoration: none;
+  }
+  
+  /* Hover effect for links */
+  .nav-item a:hover {
+    background-color: #111;
+  }
+  
+  .tabbed-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.tab-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.tab-link {
+    padding: 10px 20px;
+    background-color: #ccc;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.tab-link.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.tab-content {
+    display: none;
+    margin-top: 10px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+textarea {
+    width: 100%;
+    height: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: monospace;
+    resize: none;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.output {
+    margin-top: 20px;
+}
+
+iframe {
+    width: 100%;
+    height: 300px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+/* Success and Error Messages */
+.success-message {
+    margin-top: 10px;
+    color: green;
+    font-size: 16px;
+    font-weight: bold;
+    display: none;
+}
+
+.success-message .tick {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.error-message {
+    margin-top: 10px;
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+}

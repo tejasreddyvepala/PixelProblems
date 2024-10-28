@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li class="nav-item"><a href="product.html">Product</a></li>
+                <li class="nav-item"><a href="#">About</a></li>
+                <li class="nav-item"><a href="#">Contact</a></li>
+                <li class="nav-item"><a href="index.html">Sign In</a></li>
+                <li class="nav-item"><a href="base.html">Skip for testing</a></li>
+            </ul>
+            <h1 class="logo"><a href="#">Coding Challenges</a></h1>
+        </div>
+    </nav>
+
+    <!-- Login Container -->
+    <div class="login-container">
+        <h2>Login to Your Account</h2>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <label>
+                <input type="checkbox" id="remember-me"> Remember Me
+            </label>
+            <button type="submit">Log In</button>
+        </form>
+        <div id="error-message" class="hidden"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Compiler with Validation</title>
+    <link rel="stylesheet" href="html_compiler.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo"><a href="#">Coding Challenges</a></h1>
+            <ul class="nav-links">
+                <li class="nav-item"><a href="base.html">Home</a></li>
+                <li class="nav-item"><a href="product.html">Product</a></li>
+                <li class="nav-item"><a href="#">About</a></li>
+                <li class="nav-item"><a href="#">Contact</a></li>
+                <li class="nav-item"><a href="index.html">Log out</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Tabbed Code Editor Container -->
+    <div class="tabbed-container">
+        <!-- Tab Buttons -->
+        <div class="tab-buttons">
+            <button class="tab-link active" onclick="openTab(event, 'html')">HTML</button>
+            <button class="tab-link" onclick="openTab(event, 'css')">CSS</button>
+            <button class="tab-link" onclick="openTab(event, 'js')">JavaScript</button>
+        </div>
+
+        <!-- Code Editors -->
+        <div id="html" class="tab-content active">
+            <textarea id="html-code" placeholder="Write HTML code here..."></textarea>
+        </div>
+
+        <div id="css" class="tab-content">
+            <textarea id="css-code" placeholder="Write CSS code here..."></textarea>
+        </div>
+
+        <div id="js" class="tab-content">
+            <textarea id="js-code" placeholder="Write JavaScript code here..."></textarea>
+        </div>
+
+        <!-- Run Code Button -->
+        <button onclick="runCombinedCode()">Run Code</button>
+
+        <!-- Success and Error Display -->
+        <div id="success-message" class="success-message"></div>
+        <div id="error-message" class="error-message"></div>
+
+        <!-- Output Section -->
+        <div class="output">
+            <iframe id="output-frame" sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+    </div>
+
+
+    <script src="html_compiler.js"></script>
+
+</body>
+</html>
