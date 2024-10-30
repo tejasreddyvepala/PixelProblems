@@ -1,7 +1,0 @@
-[build]
-  base = "" # Set to the root directory
-  publish = "public" # Publish the public directory
-  command = "" # Remove the build command if no build process is needed
-
-[functions]
-  directory = "public/netlify/functions"
