@@ -1,9 +1,10 @@
-const functions = require('firebase-functions'); // Import Firebase Functions
+const functions = require('firebase-functions'); // Firebase Functions
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const admin = require('firebase-admin');
+const path = require('path');
 
 // Initialize Firebase Admin SDK
 const serviceAccount = require('./serviceAccountKey.json');
@@ -24,7 +25,22 @@ app.use(session({
 }));
 
 // Serve static files from the "public" folder
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../public')));
+
+// 1. Add Authentication Middleware here
+function isAuthenticated(req, res, next) {
+  if (req.session.user) {
+    return next(); // Proceed if authenticated
+  } else {
+    return res.redirect('/'); // Redirect to login page if not authenticated
+  }
+}
+
+// 2. Add the protected route for 'base.html' here
+app.get('/base.html', isAuthenticated, (req, res) => {
+  res.sendFile(__dirname + '/public/base.html');
+});
+
 
 // Route: Home Page
 app.get('/', (req, res) => {
@@ -34,7 +50,7 @@ app.get('/', (req, res) => {
       <a href="/logout">Logout</a>
     `);
   } else {
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(path.join(__dirname, '../public/index.html'));
   }
 });
 
@@ -93,7 +109,9 @@ app.post('/login', async (req, res) => {
 
     // Set user session
     req.session.user = { username };
-    res.redirect('/base.html');
+
+    // Redirect to the full URL of base.html served by Firebase Hosting
+    res.redirect('https://pixelproblems-2dcc2.web.app/base.html');
   } catch (error) {
     console.error('Error during login:', error.message);
     res.send('Failed to log in.');

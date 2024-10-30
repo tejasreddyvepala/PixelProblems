@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML/CSS/JS Learning Course</title>
+    <link rel="stylesheet" href="course.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .section {
+            display: none;
+            margin-bottom: 40px;
+        }
+        .active {
+            display: block;
+        }
+        .quiz {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .question {
+            font-weight: bold;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Welcome to the HTML/CSS/JS Course</h1>
+    
+    <!-- Stage 1 -->
+    <div class="section active" id="stage1">
+        <h2>Stage 1: Introduction to HTML</h2>
+        <p>HTML (HyperText Markup Language) is the standard language for creating web pages. It uses tags to structure content like headings, paragraphs, links, images, and more.</p>
+        <div class="quiz">
+            <p class="question">What does HTML stand for?</p>
+            <input type="text" id="answer1" placeholder="Your answer">
+            <button class="btn" onclick="checkAnswer('answer1', 'HyperText Markup Language', 'stage2')">Submit</button>
+            <div class="feedback" id="feedback1"></div>
+        </div>
+    </div>
+
+    <!-- Stage 2 -->
+    <div class="section" id="stage2">
+        <h2>Stage 2: Introduction to CSS</h2>
+        <p>CSS (Cascading Style Sheets) is used to style and layout web pages. You can control colors, fonts, and positioning of elements on the page using CSS.</p>
+        <div class="quiz">
+            <p class="question">Which property is used to change the background color in CSS?</p>
+            <input type="text" id="answer2" placeholder="Your answer">
+            <button class="btn" onclick="checkAnswer('answer2', 'background-color', 'stage3')">Submit</button>
+            <div class="feedback" id="feedback2"></div>
+        </div>
+    </div>
+
+    <!-- Stage 3 -->
+    <div class="section" id="stage3">
+        <h2>Stage 3: Introduction to JavaScript</h2>
+        <p>JavaScript is a programming language used to create dynamic and interactive effects on web pages. It can change content, validate forms, and much more.</p>
+        <div class="quiz">
+            <p class="question">What is the syntax to write "Hello, World!" to the console in JavaScript?</p>
+            <input type="text" id="answer3" placeholder="Your answer">
+            <button class="btn" onclick="checkAnswer('answer3', 'console.log("Hello, World!")', 'completion')">Submit</button>
+            <div class="feedback" id="feedback3"></div>
+        </div>
+    </div>
+
+    <!-- Completion -->
+    <div class="section" id="completion">
+        <h2>Congratulations!</h2>
+        <p>You have completed the HTML/CSS/JS course. Keep practicing and building your skills!</p>
+    </div>
+</div>
+
+<script>
+    // Function to check answer and move to the next stage
+    function checkAnswer(inputId, correctAnswer, nextStageId) {
+        const userAnswer = document.getElementById(inputId).value.trim();
+        const feedbackId = 'feedback' + inputId.charAt(inputId.length - 1);
+        const feedback = document.getElementById(feedbackId);
+
+        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+            feedback.textContent = 'Correct! Proceeding to the next stage...';
+            feedback.style.color = 'green';
+            setTimeout(() => {
+                document.getElementById(nextStageId).classList.add('active');
+                document.getElementById(inputId).parentElement.parentElement.classList.remove('active');
+            }, 1000);
+        } else {
+            feedback.textContent = 'Incorrect, please try again.';
+            feedback.style.color = 'red';
+        }
+    }
+</script>
+
+</body>
+</html>

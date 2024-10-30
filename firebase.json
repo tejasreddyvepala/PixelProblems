@@ -9,12 +9,13 @@
       "rewrites": [
         {
           "source": "**",
-          "function": "server" // The name of the function in functions/server.js
+          "function": "server"
         }
       ]
     },
     "functions": {
-      "source": "functions"
+      "source": "functions",
+      "runtime": "nodejs22"
     }
   }
   
