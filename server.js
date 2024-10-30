@@ -13,7 +13,6 @@ admin.initializeApp({
 const db = admin.firestore();
 
 const app = express();
-const PORT = 8000;
 
 // Set up middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -113,7 +112,9 @@ app.use((req, res) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 8080; // Use Cloud Run's port 8080
+// Ensure this declaration only appears once in your code
+const PORT = process.env.PORT || 8080; // Use Cloud Run's port
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
