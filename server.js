@@ -113,6 +113,8 @@ app.use((req, res) => {
 });
 
 // Start the server
+const PORT = process.env.PORT || 8080; // Use Cloud Run's port 8080
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
+
