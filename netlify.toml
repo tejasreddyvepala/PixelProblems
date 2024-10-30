@@ -1,0 +1,6 @@
+[build]
+  publish = "public"
+  command = "npm run build" # Use this if you have a build process, otherwise remove it
+
+[functions]
+  directory = "netlify/functions"

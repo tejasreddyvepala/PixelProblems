@@ -3,9 +3,10 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const admin = require('firebase-admin');
+const serverless = require('serverless-http');
 
 // Initialize Firebase Admin SDK
-const serviceAccount = require('./serviceAccountKey.json');
+const serviceAccount = require('../.././serviceAccountKey.json');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
@@ -13,7 +14,6 @@ admin.initializeApp({
 const db = admin.firestore();
 
 const app = express();
-const PORT = 8000;
 
 // Set up middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,7 +26,7 @@ app.use(session({
 // Serve static files from the "public" folder
 app.use(express.static('public'));
 
-// Route: Home Page
+// Define your routes
 app.get('/', (req, res) => {
   if (req.session.user) {
     res.send(`
@@ -34,85 +34,57 @@ app.get('/', (req, res) => {
       <a href="/logout">Logout</a>
     `);
   } else {
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(__dirname + '/index.html');
   }
 });
 
-// Route: Sign-Up
 app.post('/signup', async (req, res) => {
-  console.log('Received sign-up request:', req.body); // Debugging log
-
   const { username, password } = req.body;
 
   try {
-    // Check if the user already exists
     const userRef = db.collection('users').doc(username);
     const userDoc = await userRef.get();
 
     if (userDoc.exists) {
-      return res.send('User already exists! Please log in.');
+      return res.json({ success: false, message: 'User already exists!' });
     }
 
-    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Save user info in Firestore
     await userRef.set({
       username,
       password: hashedPassword
     });
 
-    res.send('User registered successfully! Please log in.');
+    res.json({ success: true, message: 'User registered successfully!' });
   } catch (error) {
-    console.error('Error during sign-up:', error.message);
-    res.send('Failed to sign up.');
+    res.json({ success: false, message: 'Failed to sign up.' });
   }
 });
 
-// Route: Login
 app.post('/login', async (req, res) => {
-  console.log('Received login request:', req.body); // Debugging log
-
   const { username, password } = req.body;
 
   try {
-    // Check if the user exists in Firestore
     const userRef = db.collection('users').doc(username);
     const userDoc = await userRef.get();
 
     if (!userDoc.exists) {
-      return res.send('User not found! Please sign up.');
+      return res.json({ success: false, message: 'User not found!' });
     }
 
     const userData = userDoc.data();
     const isPasswordValid = await bcrypt.compare(password, userData.password);
 
     if (!isPasswordValid) {
-      return res.send('Invalid password! Please try again.');
+      return res.json({ success: false, message: 'Invalid password!' });
     }
 
-    // Set user session
     req.session.user = { username };
-    res.redirect('/base.html');
+    res.json({ success: true, message: 'Login successful!' });
   } catch (error) {
-    console.error('Error during login:', error.message);
-    res.send('Failed to log in.');
+    res.json({ success: false, message: 'Failed to log in.' });
   }
 });
 
-// Route: Logout
-app.get('/logout', (req, res) => {
-  req.session.destroy(() => {
-    res.redirect('/');
-  });
-});
-
-// Error handling for unmatched routes
-app.use((req, res) => {
-  res.status(404).send('404: Page not found');
-});
-
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+// Export the serverless function
+module.exports.handler = serverless(app);

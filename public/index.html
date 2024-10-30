@@ -22,7 +22,7 @@
 
     <div class="container">
         <!-- Manual Login Form -->
-        <form action="/login" method="POST">
+        <form id="loginForm">
             <h2 style="text-align:center">Manual Login</h2>
             <div class="col">
                 <input type="text" name="username" placeholder="Username" required>
@@ -42,5 +42,38 @@
             </div>
         </div>
     </div>
+
+    <!-- JavaScript for form submission -->
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
+
+            // Get form data
+            const formData = new FormData(this);
+            const username = formData.get('username');
+            const password = formData.get('password');
+
+            // Send login request to Netlify function
+            try {
+                const response = await fetch('/.netlify/functions/handler', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Login successful!');
+                    window.location.href = 'base.html'; // Redirect on success
+                } else {
+                    alert(result.message); // Show error message
+                }
+            } catch (error) {
+                console.error('Error during login:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+    </script>
 </body>
 </html>
