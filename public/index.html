@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li class="nav-item"><a href="product.html">Product</a></li>
+                <li class="nav-item"><a href="#">About</a></li>
+                <li class="nav-item"><a href="#">Contact</a></li>
+                <li class="nav-item"><a href="signup.html">Sign up</a></li>
+                <li class="nav-item"><a href="base.html">Skip for testing</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Manual Login Form -->
+        <form action="/login" method="POST">
+            <h2 style="text-align:center">Manual Login</h2>
+            <div class="col">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit" class="btn">Login</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="bottom-container">
+        <div class="row">
+            <div class="col">
+                <a href="signup.html" class="btn">Sign up</a>
+            </div>
+            <div class="col">
+                <a href="#" class="btn">Forgot password?</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
