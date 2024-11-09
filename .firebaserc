@@ -1,5 +1,11 @@
 {
   "projects": {
     "default": "pixelproblems-2dcc2"
+  },
+  "targets": {},
+  "etags": {
+    "pixelproblems-2dcc2": {
+      "extensionInstances": {}
+    }
   }
 }
